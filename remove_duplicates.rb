@@ -9,7 +9,7 @@ def remove_duplicates(nums)
     nums.length
 end
 
-# 3.57%, Time: O(N), Space: O(N)
+# 3.57%, Time: O(N^2), Space: O(N)
 def remove_duplicates(nums)
     already_seen = {}
     index = 0
