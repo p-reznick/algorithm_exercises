@@ -1,5 +1,4 @@
-# 43.9% Space: O(1) Time: O(N)
-
+# 43.9% Space: O(1) Time: O(N^2)
 def remove_element(nums, val)
     index = 0
     while index < nums.length

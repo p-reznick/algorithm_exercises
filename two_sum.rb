@@ -1,5 +1,5 @@
-1
-Brute force, Space: O[1] Time: O(N)
+# 1
+# Brute force, Space: O(1) Time: O(N^2)
 def two_sum(nums, target)
     l = nums.length
 
