@@ -19,8 +19,7 @@ def is_perfect_square(n)
   while left + 1 < right
     mid = left + (right - left) / 2
     current_square = mid**2
-    p mid
-    p current_square
+
     if current_square == n
       return true
     elsif current_square < n
