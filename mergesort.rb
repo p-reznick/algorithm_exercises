@@ -1,5 +1,5 @@
-# Time: O(N log N) -- binary process to reduce data to single
-# array, linear recombination for each level of binary tree
+# Time: O(N log N) -- log n steps to recombine all of the arrays, and n steps
+# to merge on each level, linear recombination for each level of binary tree
 # Space: O(N)
 def mergesort(nums)
   return nums if nums.length == 1
