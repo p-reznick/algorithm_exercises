@@ -1,4 +1,4 @@
-# 203
+# 83
 # Definition for singly-linked list.
 # class ListNode
 #     attr_accessor :val, :next
@@ -9,35 +9,35 @@
 # end
 
 # @param {ListNode} head
-# @param {Integer} val
 # @return {ListNode}
-def remove_elements(head, val)
+def delete_duplicates(head)
   dummy = ListNode.new(nil)
   dummy.next = head
   current = dummy
 
   while current.next
-    if current.next.val == val
+    if current.val == current.next.val
       current.next = current.next.next
     else
       current = current.next
     end
   end
+
   dummy.next
 end
 
-#recursive solution
-def remove_elements(head, val, previous=ListNode.new(nil))
-  return nil if head.nil?
-  if head.next == nil
-    return head.val == val ? nil : head
+# recursive
+def delete_duplicates(head, previous=ListNode.new(nil))
+  return nil unless head
+  if !head.next
+    return head.val != previous.val ? head : nil
   end
 
-  if head.val == val
-    previous.next = remove_elements(head.next, val, previous)
+  if previous.val == head.val
+    previous.next = delete_duplicates(head.next, previous)
     return previous.next
   else
-    head.next = remove_elements(head.next, val, head)
+    head.next = delete_duplicates(head.next, head)
     return head
   end
 end
