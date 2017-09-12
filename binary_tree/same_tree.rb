@@ -8,8 +8,6 @@ def is_same_tree(p, q)
   # DnC base problem
   return false if p.nil? && q || q.nil? && p || p.val != q.val
 
-  left_same = is_same_tree(p.left, q.left)
-  right_same = is_same_tree(p.right, q.right)
-
+  # return solution, true if left and right child trees are the same, false otherwise
   left_same && right_same
 end

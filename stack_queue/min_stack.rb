@@ -1,4 +1,9 @@
 # 155
+# maintain a separate mins stack and current min variable.  The mins stack
+# accepts the value being pushed to main if it's empty or the new val is
+# greater than the current min.  The mins val is popped if it is equal to the
+# current min.
+
 class MinStack
   attr_accessor :mins, :main, :current_min
   def initialize()
