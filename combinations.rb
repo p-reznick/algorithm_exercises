@@ -11,7 +11,7 @@ def combine(n, k)
   nums = (1..n).to_a
   n.times do |_i|
     break if nums.length < k
-    combine_helper(nums, [nums[0]], k, result)
+    combine_helper(nums, [], k, result)
     nums.shift
   end
   result
@@ -22,10 +22,10 @@ def combine_helper(nums, solution, k, result)
     result << solution.clone
   else
     nums.each_with_index do |num, index|
-      next if solution.include?(num)
+      # next if solution.include?(num) # O(N), expensive, use hash set, this operation O(1)
       solution << num
 
-      combine_helper(nums[index + 1...nums.length], solution, k, result)
+      combine_helper(nums[index + 1...nums.length], solution, k, result) # O(N) operation, expensive
 
       solution.pop
     end
