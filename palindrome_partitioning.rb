@@ -1,45 +1,29 @@
-# string of length l
-# create an array with all integers 1..l
-# generate all combinations of integers that sum to l, with integer repetition allowed
-def partition(string)
-  result = []
-  target = str.length
-  sorted = []
-  for idx in 1..target
-    sorted << [idx] * target
-  end
-  backtrack(result, [], sorted, {}, target, 0, 0, string)
-  result
+# Kevin's solution
+# build trees of all possible consecutive substrings, and as you traverse the tree, the backtrack condition is that a non-palindrome is encountered.  Construct the trees using integers as the node, with each integer referring to how much we "bite off" of the front of the string.
+# @param {String} s
+# @return {String[][]}
+def partition(s)
+    result = []
+    partition_helper(s, [], result)
+    result
 end
 
-def backtrack(result, solution, candidates, result, target, start, current_sum)
-  return if current_sum > target
-  if current_sum == target && !result[solution]
-    string_solution = get_strings(solution, string)
-    if string_solution.all? do |str|
-      is_palindrome?(str)
+def partition_helper(s, solution, result)
+    if s == ""
+        result << solution.clone
+    else
+        (1..s.size).each do |num|
+            substring = s.slice(0, num)
+            if palindrome?(substring)
+                solution << substring
+                partition_helper(s[substring.size..-1], solution, result)
+                solution.pop
+            end
+        end
     end
-    result[solution] = 1
-    result << solution.clone
-  end
-
-  (start...candidates.size).each do |idx|
-    backtrack(result, solution + [candidates[idx]], candidates, result, target, idx + 1, current_sum + candidates[idx])
-  end
-
-  # without mutating array, consumes additional space with each additional array created
 end
 
-def get_strings(arr, string)
-  start = 0
-  arr.map do |length|
-    finish = start + length
-    temp = string[start...finish]
-    start = finish
-    temp
-  end
-end
-
-def is_palindrome?(str)
-  str == str.reverse
+def palindrome?(string)
+   return true if string.size == 0 || string.size == 1
+   string[0] == string[-1] && palindrome?(string[1..-2])
 end

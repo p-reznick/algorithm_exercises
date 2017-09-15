@@ -1,27 +1,28 @@
-# 46
-# a preorder traversal solution, with the mental model of a graph
-# representing all of the possible solution states
+#46
+# a preorder traversal solution
 def permute(nums)
-  result = []
-  # invoke recursive helper for traversal w result carrying over state
-  permute_helper(nums, [], result)
-  result
+    result = []
+    permute_helper(nums, [], result)
+    result
 end
 
 def permute_helper(nums, solution, result)
-  # recursive base case -- add solution to to results if length is correct
-  if nums.length == solution.length
-    result << solution.clone
-  else
-    # else iterate over children, adding them to the solution
-    # UNLESS the child is already contained in the solution
-    nums.each do |num|
-      next if solution.include?(num)
-      solution << num
 
-      permute_helper(nums, solution, result)
+    # check solution is complete, if so, backtrack right away
+    if solution.size == nums.size
+        solution_nums = solution.map { |elem| nums[elem] }
+        result << solution_nums if !result.include?(solution_nums)
+    else
+        nums.each_with_index do |num, idx|
+            # root processing
+            next if solution.include?(idx)
+            solution << idx
 
-      solution.pop
+            # recursive preorder traversal
+            permute_helper(nums, solution, result)
+
+            # state maintenance
+            solution.pop
+        end
     end
-  end
 end
