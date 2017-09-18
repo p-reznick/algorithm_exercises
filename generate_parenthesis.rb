@@ -1,0 +1,10 @@
+- what defines solution?
+  - A string containing n * 2 well formed parens
+  - well formed means:
+    - there are equal numbers of opening and closing parens
+    - a closing paren is never inserted unless at least one open paren exists to the left
+- what is branching logic?
+  -
+- what defines dead end?
+  - a dead end is 
+- how to adjust state?

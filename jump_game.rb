@@ -1,13 +1,15 @@
 def can_jump(nums)
-  can_reach?(nums, nums.length - 1, 0)
+  jump_game_helper(nums, nums.length - 1, {})
 end
 
-def can_reach?(nums, index, jump_length)
-  if nums[index] > jump_length && index == 0
-    return true
-  elsif nums[index] > jump_length
-    can_reach?(nums, index - 1, 1)
-  else
-    return false
+def jump_game_helper(nums, current_index)
+  return true if current_index == 0 ||
+                 memo[current_index] = true
+
+  (0...current_index).each do |inner_index|
+    return true if nums[inner_index] >= (current_index - inner_index) &&
+                   jump_game_helper(nums, inner_index)
   end
+
+  false
 end
