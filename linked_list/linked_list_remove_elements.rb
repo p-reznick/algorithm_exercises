@@ -11,20 +11,23 @@
 # @param {ListNode} head
 # @param {Integer} val
 # @return {ListNode}
+# iterative solution
 def remove_elements(head, val)
-  dummy = ListNode.new(nil)
-  dummy.next = head
-  current = dummy
+  return nil if head.nil?
+
+  current = head
 
   while current.next
     if current.next.val == val
-      current.next = current.next.next
+        current.next = current.next.next
     else
-      current = current.next
+        current = current.next
     end
   end
-  dummy.next
+
+  head.val == val ? head.next : head
 end
+
 
 #recursive solution
 def remove_elements(head, val, previous=ListNode.new(nil))
