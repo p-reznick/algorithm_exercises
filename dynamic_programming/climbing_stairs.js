@@ -6,6 +6,7 @@
  * @param {number} n
  * @return {number}
  */
+ // DP + memoization solution
 var climbStairs = function(n) {
   const memo = [];
   memo[0] = 0;
