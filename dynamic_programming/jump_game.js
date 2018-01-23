@@ -19,8 +19,8 @@ function helper(nums, current_index, memo) {
   }
 
   for (let i = 0; i < current_index; i += 1) {
-    if (i + nums[i] >= current_index) {
-      if (memo[i] || helper(nums, i, memo)) {
+    if (i + nums[i] >= current_index && memo[i] != false) {
+      if (helper(nums, i, memo)) {
         memo[i] = true;
         return true;
       } else {
