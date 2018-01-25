@@ -1,17 +1,25 @@
 function root(x, n) {
-  // k^n = x => k = x^(1/n)
-  let k = x;
-
-  while (power(k, n) != x) {
-    console.log(k);
-    if (power(k, n) > x) {
-      k = k / 2;
-    } else {
-      k = k + (k / 2);
-    }
+  if (x === 0) {
+    return 0;
   }
 
-  return k;
+  let lowerBound = 0;
+  let upperBound = x;
+  let approxRoot = (lowerBound + upperBound) / 2;
+
+  while (approxRoot - lowerBound >= 0.001) {
+    if (power(approxRoot, n) > x) {
+      upperBound = approxRoot;
+    } else if (power(approxRoot, n) < x) {
+      lowerBound = approxRoot;
+    } else {
+      break;
+    }
+
+    approxRoot = (upperBound + lowerBound) / 2;
+  }
+
+  return +approxRoot.toFixed(3);
 }
 
 function power(base, exponent) {
@@ -23,5 +31,3 @@ function power(base, exponent) {
 
   return result;
 }
-
-root(27, 3);
